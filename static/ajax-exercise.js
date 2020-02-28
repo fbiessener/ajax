@@ -6,6 +6,11 @@
 function showFortune(evt) {
 
     // TODO: get the fortune and show it in the #fortune-text div
+    $.get('/fortune', (response) => {
+      // .text() returned plain text
+      // .html() returns the html formatting for the response given by the form
+          $('#fortune-text').html(response);
+    });
 }
 
 $('#get-fortune-button').on('click', showFortune);
