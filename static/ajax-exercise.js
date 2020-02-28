@@ -6,11 +6,14 @@
 function showFortune(evt) {
 
     // TODO: get the fortune and show it in the #fortune-text div
-    $.get('/fortune', (response) => {
-      // .text() returned plain text
-      // .html() returns the html formatting for the response given by the form
-          $('#fortune-text').html(response);
-    });
+    // $.get('/fortune', (response) => {
+    //   // .text() returned plain text
+    //   // .html() returns the html formatting for the response given by the form
+    //       $('#fortune-text').html(response); 
+    // });
+
+    // get refactor with load()
+    $('#fortune-text').load('/fortune');
 }
 
 $('#get-fortune-button').on('click', showFortune);
@@ -25,12 +28,18 @@ function showWeather(evt) {
     evt.preventDefault();
 
     let url = '/weather.json';
-    let formData = {'zipcode': $('#zipcode-field').val()};
+    // let formData = {'zipcode': $('#zipcode-field').val()};
+
+    // serialize() refactor
+    const formValues = $('#weather-form').serialize();
 
     // TODO: request weather with that URL and show the forecast in #weather-info
-    $.get(url, formData, (response) => {
+    // replace formValues with formData to run non-serialized code block
+    $.get(url, formValues, (response) => {
       $('#weather-info').text(response.forecast);
     });
+
+
 }
 
 $('#weather-form').on('submit', showWeather);
