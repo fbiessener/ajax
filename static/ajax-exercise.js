@@ -51,8 +51,6 @@ $('#weather-form').on('submit', (evt) => {
 });
 
 
-
-
 // // PART 3: ORDER MELONS
 
 // function orderMelons(evt) {
