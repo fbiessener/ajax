@@ -45,18 +45,28 @@ function orderMelons(evt) {
 
     // TODO: show the result message after your form
     // TODO: if the result code is ERROR, make it show up in red (see our CSS!)
-    const formInputs = {
-      'qty': $('#qty-field').val(),
-      'melon_type': $('#melon-type-field').val()
-    };
+ 
+    // explicitly getting each individual input from the form
+    // const formInputs = {
+    //   'qty': $('#qty-field').val(),
+    //   'melon_type': $('#melon-type-field').val()
+    // };
 
-    console.log(formInputs);
+    // console.log(formInputs);
 
-    $.post('/order-melons.json', formInputs, (response) => {
-      ;
-    })
+    // Same code, but with serialize() instead
+    const formValues = $('#order-form').serialize();
+
+    // change data param to formInputs to run commented out block instead of 
+    // serialize() block
+    $.post('/order-melons.json', formValues, (response) => {
+      $('#order-status').text(response.msg);
+      if (response.code === 'ERROR') {
+        $('#order-status').addClass('order-error');
+      } else {
+        $('#order-status').removeClass('order-error');
+      }
+    });
 }
 
 $('#order-form').on('submit', orderMelons);
-
-
