@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 
 // PART 1: SHOW A FORTUNE
@@ -24,16 +24,16 @@ $('#get-fortune-button').on('click', showFortune);
 function showWeather(evt) {
     evt.preventDefault();
 
-    let url = "/weather.json";
-    let formData = {"zipcode": $("#zipcode-field").val()};
+    let url = '/weather.json';
+    let formData = {'zipcode': $('#zipcode-field').val()};
 
     // TODO: request weather with that URL and show the forecast in #weather-info
     $.get(url, formData, (response) => {
       $('#weather-info').text(response.forecast);
-    })
+    });
 }
 
-$("#weather-form").on('submit', showWeather);
+$('#weather-form').on('submit', showWeather);
 
 
 
@@ -45,8 +45,18 @@ function orderMelons(evt) {
 
     // TODO: show the result message after your form
     // TODO: if the result code is ERROR, make it show up in red (see our CSS!)
+    const formInputs = {
+      'qty': $('#qty-field').val(),
+      'melon_type': $('#melon-type-field').val()
+    };
+
+    console.log(formInputs);
+
+    $.post('/order-melons.json', formInputs, (response) => {
+      ;
+    })
 }
 
-$("#order-form").on('submit', orderMelons);
+$('#order-form').on('submit', orderMelons);
 
 
